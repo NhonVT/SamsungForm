@@ -895,7 +895,15 @@
 }
 
 @media screen and (max-width:560px)  and (orientation :portrait){
-
+  .fs-logo img{
+    max-width: 100px;
+  }
+  .fs-title .fs-area-pic img{
+    max-width: 350px;
+  }
+  .fs-title h2{
+    font-size: 24px;
+  }
 }
 
 @media screen and (max-width:390px)  and (orientation :portrait){
