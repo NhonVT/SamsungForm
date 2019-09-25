@@ -25,6 +25,7 @@
     <link rel="preload" href="css/reset.css" as="style">
     <link rel="preload" href="css/index.css" as="style">
     <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -221,7 +222,7 @@
                                     <div class="fs-error-txt">
                                         <p>Địa chỉ không được rỗng</p>
                                     </div>
-                                    <input type="text" name="fs_txt_address" id="fs_txt_address" value=""
+                                    <input type="hidden" name="fs_txt_address" id="fs_txt_address" value=""
                                         placeholder="Địa chỉ*">
                                 </div>
                             </div>
@@ -235,12 +236,12 @@
                                         <h3>Tỉnh / Thành Phố*</h3>
                                     </div>
                                     <div class="fs-select-box">
-                                        <ul>
-                                            <li data-target="1">Cần Thơ</li>
+                                        <ul id='test' data-target="2">
+                                            <!-- <li data-target="1">Cần Thơ</li>
                                             <li data-target="2">Đà Nẵng</li>
                                             <li data-target="3">Hà Nội</li>
                                             <li data-target="4">Hồ Chí Minh</li>
-                                            <li data-target="5">Khác</li>
+                                            <li data-target="5">Khác</li> -->
                                         </ul>
                                     </div>
                                 </div>
