@@ -11,20 +11,8 @@ var isIE11 = /rv:11.0/i.test(ua) && !IEMobile ? true : false;
 if (isIE9 || isIE10 || isIE11) {
 	$('body').addClass('isIE');
 }
-
-function inputHolder() {
-	$('.fs_error_txt').click(function () {
-		$(this).parent().removeClass('fs-show-error');
-		$(this).parent().find('input').focus();
-	});
-	$('input[type="text"]').focus(function (e) {
-		$(this).parent().removeClass('fs-show-error');
-	});
-
-}
-
-
 var threshold = 300;
+
 function ImgLazyLoad() {
 
 	var winH = $(window).height();
