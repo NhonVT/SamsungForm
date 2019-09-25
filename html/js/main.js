@@ -11,20 +11,8 @@ var isIE11 = /rv:11.0/i.test(ua) && !IEMobile ? true : false;
 if (isIE9 || isIE10 || isIE11) {
 	$('body').addClass('isIE');
 }
-
-function inputHolder() {
-	$('.fs_error_txt').click(function () {
-		$(this).parent().removeClass('fs-show-error');
-		$(this).parent().find('input').focus();
-	});
-	$('input[type="text"]').focus(function (e) {
-		$(this).parent().removeClass('fs-show-error');
-	});
-
-}
-
-
 var threshold = 300;
+
 function ImgLazyLoad() {
 
 	var winH = $(window).height();
@@ -52,9 +40,6 @@ function ImgLazyLoad() {
 
 }
 
-//SET LIMITED TIME FOR BOOT TICKET
-
-
 function fsEvent() {
 
 	//Select list
@@ -65,30 +50,34 @@ function fsEvent() {
 		} else {
 			$('.fs-select').removeClass('open');
 			box.addClass('open');
+			selectItem();
 		}
 	});
 
-	$('.fs-select-box li').click(function () {
-		var that = $(this);
-		var box = $(this).parent().parent().parent();
+	// $('.fs-select-box li').click(function () {
+	// 	console.log('aaa');
+	// 	var that = $(this);
+	// 	var box = $(this).parent().parent().parent();
 
-		if (!that.hasClass('selected')) {
-			box.find('li').removeClass('selected');
-			that.addClass('selected');
-			box.removeClass('open');
+	// 	if (!that.hasClass('fs-select')) {
+	// 		box.find('li').removeClass('fs-select');
+	// 		that.addClass('fs-select');
+	// 		box.removeClass('open');
 
-			box.find('.fs-select-header h3').html(that.text());
-			box.find('.fs-select-header p').html(that.text());
+	// 		box.find('.fs-select-header h3').html(that.text());
+	// 		box.find('.fs-select-header p').html(that.text());
 
-		}
+	// 	}
+	// });
 
-	});
 
+	// Click outside close popup select
 	$(document).on('click touchstart', function (event) {
-		if ($(".fs-select-list").has(event.target).length == 0 && !$(".fs-select-list").is(event.target)) {
-			$(".fs-select-list").removeClass("open");
+		if (!$(".fs-select").is(event.target) && $(".fs-select").has(event.target).length === 0) {
+			$(".fs-select").removeClass("open");
 		}
 	});
+	//End Select list
 
 
 	//End
@@ -118,7 +107,9 @@ function fsEvent() {
 	});
 
 	inputHolder();
-
+	getCity();
+	getReason();
+	selectItem();
 }
 
 
@@ -132,7 +123,10 @@ function inputHolder() {
 	});
 	$('.fs-select').click(function () {
 		$(this).parents().removeClass('fs-show-error');
-	})
+	});
+	$("input[type=checkbox]").on("change", function(){
+		$(this).parent().removeClass('fs-show-error');
+	});
 }
 
 
@@ -165,24 +159,64 @@ $(window).on('load', function () {
 	});
 	fsEvent();
 });
-var city;
+
+var cities;
+
 var getCity = function () {
+	console.log('getCity');
 	$.ajax({
 		url: "http://localhost:53081/City/GetCityLookup",
 		type: "GET",
 		success: function (result) {
 			cities = result;
+			console.table(result);
 			cities.forEach(function(city){
-				$("#test").append('<li data-target="'+ city.Id +'">'+ city.DisplayName +'</li>');
+				$("#city").append('<li data-target="'+ city.KeyId +'">'+ city.DisplayName +'</li>');
 			})
 		}
 	});
 }
+
+var reason;
+var getReason = function () {
+	console.log('getReason');
+	$.ajax({
+		url: "http://localhost:53081/Register/ReasonTypeLookup",
+		type: "GET",
+		success: function (result) {
+			reason = result;
+			reason.forEach(function(item){
+				$("#reason").append('<li data-target="'+ item.KeyId +'">'+ item.DisplayName +'</li>');
+			}) 
+		}
+	});
+}
+
+var selectItem = function () {
+		$('.fs-select-box li').click(function () {
+		console.log('aaa');
+		var that = $(this);
+		var box = $(this).parent().parent().parent();
+
+		if (!that.hasClass('fs-select')) {
+			box.find('li').removeClass('fs-select');
+			that.addClass('fs-select');
+			box.removeClass('open');
+
+			box.find('.fs-select-header h3').html(that.text());
+			box.find('.fs-select-header p').html(that.text());
+
+		}
+	});
+}
+var car = {type:"Fiat", model:"500", color:"white"};
+console.log(car);
 $(window).on("orientationchange", Rotate);
 
 (function () {
 	ImgLazyLoad();
-	getCity();
+	// getCity();
+	// getReason();
 
 	//$('body').addClass('fs-no-scroll');
 	//$('.fs-overlay').addClass('active');

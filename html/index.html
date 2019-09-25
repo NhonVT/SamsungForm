@@ -2,7 +2,7 @@
 <html lang="vi">
 
 <head>
-    <title>Samsung Survey</title>
+    <title>Samsung</title>
     <meta name="keywords" content="Samsung" />
     <meta name="description" content="Samsung" />
     <meta property="og:title" content="Samsung" />
@@ -24,7 +24,6 @@
     <link rel="icon" href="images/favicon.ico">
     <link rel="preload" href="css/reset.css" as="style">
     <link rel="preload" href="css/index.css" as="style">
-    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
@@ -236,7 +235,7 @@
                                         <h3>Tỉnh / Thành Phố*</h3>
                                     </div>
                                     <div class="fs-select-box">
-                                        <ul id='test' data-target="2">
+                                        <ul id='city' data-target="2">
                                             <!-- <li data-target="1">Cần Thơ</li>
                                             <li data-target="2">Đà Nẵng</li>
                                             <li data-target="3">Hà Nội</li>
@@ -256,10 +255,10 @@
                                         <h3>Lý do bạn vào web Samsung là gì?</h3>
                                     </div>
                                     <div class="fs-select-box">
-                                        <ul>
-                                            <li data-target="1">Tôi có nhu cầu mua tivi</li>
+                                        <ul id='reason'>
+                                            <!-- <li data-target="1">Tôi có nhu cầu mua tivi</li>
                                             <li data-target="2">Tôi muốn tìm hiểu giá sản phẩm</li>
-                                            <li data-target="3">Tôi chỉ cần tìm hiểu thông tin</li>
+                                            <li data-target="3">Tôi chỉ cần tìm hiểu thông tin</li> -->
                                         </ul>
                                     </div>
                                 </div>
@@ -269,11 +268,11 @@
                         <!-- group 5 -->
                         <div class="fs-group">
                             <div class="fs-box size-06">
-                                <div class="fs-checkbox">
+                                <div class="fs-checkbox ">
                                     <ul>
-                                        <li>
+                                        <li class="fs-show-error">
                                             <input class="fs-checkbox-input" type="checkbox" name="fs-condition"
-                                                id="fs-condition" checked>
+                                                id="fs-condition" >
                                             <label class="fs-label" for="fs-condition">
                                                 Tôi đồng ý với các <a class="fs-link-condition"
                                                     href="javascript:void(0);">Điều khoản và chi tiết
@@ -376,6 +375,7 @@
     <!--script-->
     <script src="js/jquery-min.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <!--/script-->
 
 
