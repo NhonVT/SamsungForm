@@ -52,9 +52,6 @@ function ImgLazyLoad() {
 
 }
 
-//SET LIMITED TIME FOR BOOT TICKET
-
-
 function fsEvent() {
 
 	//Select list
@@ -89,9 +86,7 @@ function fsEvent() {
 			$(".fs-select").removeClass("open");
 		}
 	});
-
-	
-	//End
+	//End Select list
 
 	$('.fs-box-but .fs-button-send').click(function(){
 		$('.fs-overlay').addClass('active');
@@ -116,7 +111,10 @@ function inputHolder() {
 	});
 	$('.fs-select').click(function(){
 		$(this).parents().removeClass('fs-show-error');
-	})
+	});
+	$("input[type=checkbox]").on("change", function(){
+		$(this).parent().removeClass('fs-show-error');
+	});
 }
 
 
