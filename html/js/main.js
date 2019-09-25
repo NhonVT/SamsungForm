@@ -72,42 +72,26 @@ function fsEvent() {
 		var that = $(this);
 		var box = $(this).parent().parent().parent();
 
-		if (!that.hasClass('selected')) {
-			box.find('li').removeClass('selected');
-			that.addClass('selected');
+		if (!that.hasClass('fs-select')) {
+			box.find('li').removeClass('fs-select');
+			that.addClass('fs-select');
 			box.removeClass('open');
 
 			box.find('.fs-select-header h3').html(that.text());
 			box.find('.fs-select-header p').html(that.text());
 
 		}
-
 	});
 
+	// Click outside close popup select
 	$(document).on('click touchstart', function (event) {
-		if ($(".fs-select-list").has(event.target).length == 0 && !$(".fs-select-list").is(event.target)) {
-			$(".fs-select-list").removeClass("open");
+		if (!$(".fs-select").is(event.target) && $(".fs-select").has(event.target).length === 0) {
+			$(".fs-select").removeClass("open");
 		}
 	});
 
 	
 	//End
-
-	//Close poppup
-	// $('.overlay-form, .close-overlay').click(function (e) {
-	// 	e.preventDefault();
-	// 	popActive = false;
-	// 	$('.overlay-form').removeClass('active');
-	// 	$('body').removeClass('fs-no-scroll');
-	// 	$('html,body').scrollTop(popPos);
-	// });
-
-
-	// //Close overlay
-	// $('.fs-close-overlay').click(function () {
-	// 	$('.fs-overlay').removeClass('active');
-	// 	$('body').removeClass('fs-no-scroll');
-	// });
 
 	$('.fs-box-but .fs-button-send').click(function(){
 		$('.fs-overlay').addClass('active');
@@ -170,10 +154,4 @@ $(window).on("orientationchange", Rotate);
 
 (function () {
 	ImgLazyLoad();
-
-
-	//$('body').addClass('fs-no-scroll');
-	//$('.fs-overlay').addClass('active');
-
-
 })();
