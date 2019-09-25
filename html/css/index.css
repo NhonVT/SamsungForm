@@ -717,10 +717,10 @@
   color:#f00;
   font-size: 11px;
 }
-/* .fs-show-error .fs-error-txt{
+.fs-show-error .fs-error-txt{
   visibility:visible;
   opacity:1;
-} */
+}
 
 
 
@@ -974,6 +974,9 @@
   }
   .fs-error-txt p{
     font-size: 11px;
+  }
+  .fs-select-box{
+    min-width: 100px;
   }
 }
 
