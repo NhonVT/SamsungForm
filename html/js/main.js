@@ -89,6 +89,8 @@ function fsEvent() {
 			$(".fs-select-list").removeClass("open");
 		}
 	});
+
+	
 	//End
 
 	//Close poppup
@@ -119,6 +121,19 @@ function fsEvent() {
 
 }
 
+
+function inputHolder() {
+	$('.fs_error_txt').click(function () {
+		$(this).parent().removeClass('fs-show-error');
+		$(this).parent().find('input').focus();
+	});
+	$('input[type="text"]').focus(function (e) {
+		$(this).parent().removeClass('fs-show-error');
+	});
+	$('.fs-select').click(function(){
+		$(this).parents().removeClass('fs-show-error');
+	})
+}
 
 
 

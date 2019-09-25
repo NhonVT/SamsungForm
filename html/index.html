@@ -63,20 +63,22 @@
                         <!-- group 1 -->
                         <div class="fs-group">
                             <div class="fs-box size-06">
-                                <div class="fs-form-input">
-                                    <div class="fs-form-group">
-                                        <input type="text" name="fs_txt_name" id="fs_txt_name" value=""
-                                            placeholder="Họ và tên*">
+                                <div class="fs-form-group fs-show-error">
+                                    <div class="fs-error-txt">
+                                        <p>Họ và tên không được rỗng</p>
                                     </div>
+                                    <input type="text" name="fs_txt_name" id="fs_txt_name" value=""
+                                        placeholder="Họ và tên*">
                                 </div>
                             </div>
 
                             <div class="fs-box size-06">
-                                <div class="fs-form-input">
-                                    <div class="fs-form-group">
-                                        <input type="text" name="fs_txt_mail" id="fs_txt_mail" value=""
-                                            placeholder="Địa chỉ email*">
+                                <div class="fs-form-group fs-show-error">
+                                    <div class="fs-error-txt">
+                                        <p>Email không được rỗng</p>
                                     </div>
+                                    <input type="text" name="fs_txt_mail" id="fs_txt_mail" value=""
+                                        placeholder="Địa chỉ email*">
                                 </div>
                             </div>
                         </div>
@@ -84,16 +86,21 @@
                         <!-- group 2 -->
                         <div class="fs-group">
                             <div class="fs-box size-06">
-                                <div class="fs-form-input">
-                                    <div class="fs-form-group">
-                                        <input type="text" name="fs_txt_phone" id="fs_txt_phone" value=""
-                                            placeholder="Số điện thoại*">
+                                <div class="fs-form-group fs-show-error">
+                                    <div class="fs-error-txt">
+                                        <p>Số điện thoại không được rỗng</p>
                                     </div>
+                                    <input type="text" name="fs_txt_phone" id="fs_txt_phone" value=""
+                                        placeholder="Số điện thoại*">
                                 </div>
                             </div>
 
-                            <div class="fs-box size-06">
+                            <div class="fs-box size-06 fs-show-error">
+                                <div class="fs-error-txt">
+                                    <p>Ngày sinh không được rỗng</p>
+                                </div>
                                 <div class="fs_col_outer">
+
                                     <div class="fs-col">
                                         <div class="fs-select">
                                             <div class="fs-select-header">
@@ -210,15 +217,19 @@
                         <!-- group 3 -->
                         <div class="fs-group">
                             <div class="fs-box size-06">
-                                <div class="fs-form-input">
-                                    <div class="fs-form-group">
-                                        <input type="text" name="fs_txt_address" id="fs_txt_address" value=""
-                                            placeholder="Địa chỉ*">
+                                <div class="fs-form-group fs-show-error">
+                                    <div class="fs-error-txt">
+                                        <p>Địa chỉ không được rỗng</p>
                                     </div>
+                                    <input type="text" name="fs_txt_address" id="fs_txt_address" value=""
+                                        placeholder="Địa chỉ*">
                                 </div>
                             </div>
 
-                            <div class="fs-box size-06">
+                            <div class="fs-box size-06 fs-show-error">
+                                <div class="fs-error-txt">
+                                    <p>Tỉnh thành phố không được rỗng</p>
+                                </div>
                                 <div class="fs-select">
                                     <div class="fs-select-header">
                                         <h3>Tỉnh / Thành Phố*</h3>
