@@ -87,10 +87,12 @@ function fsEvent() {
 
 	$('.fs-link-condition').click(function(){
 		$('.fs-overlay-condition').addClass('active');
+		$('body').addClass('fs-no-scroll');
 	})
 
 	$('.fs-close-overlay-condition').click(function(){
 		$('.fs-overlay-condition').removeClass('active');
+		$('body').removeClass('fs-no-scroll');
 	})
 
 	inputHolder();
