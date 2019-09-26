@@ -942,6 +942,7 @@
   }
   .fs-title h2{
     font-size: 24px;
+    margin-bottom: 0;
   }
   .fs-title .fs-area-pic img {
     max-width: 514px;
@@ -954,7 +955,7 @@
     font-size: 13px;
   }
   .fs-form-group input[type="text"]{
-    padding: 14px 20px;
+    padding: 14px 20px 14px 14px;
   }
   .fs-select-header {
     height: 47px;
@@ -967,7 +968,7 @@
     height: 10px;
   }
   .fs-error-txt p{
-    font-size: 11px;
+    font-size: 10px;
   }
   .fs-select-box{
     min-width: 100px;
@@ -1007,13 +1008,28 @@
   .fs-icon-pop .fs-area-pic img{
     max-width: 40px;
   }
-  
+  .fs-group .fs-box:nth-child(1){
+    padding-top: 20px;
+    padding-right: 0;
+  }
+  .fs-group .fs-box:nth-child(2) {
+    padding-top: 20px;
+  }
+  .fs-error-txt{
+    top: 2px;
+  }
+  .fs-title .fs-area-pic{
+    margin-top: 20px;
+  }
+  .fs-form{
+    padding-top: 0;
+  }
 }
 
 
 
 @media screen and (max-width:390px) {
-  
+
 }
 
 @media screen and (max-width:370px) {
