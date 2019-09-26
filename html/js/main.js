@@ -78,6 +78,7 @@ function fsEvent() {
 
 	$('.fs-box-but .fs-button-send').click(function(){
 		$('.fs-overlay').addClass('active');
+		$('body,html').animate({scrollTop: 250},500)
 	});
 
 	$('.fs-box-but .fs-close-overlay').click(function(){
