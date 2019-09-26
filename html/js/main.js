@@ -85,6 +85,14 @@ function fsEvent() {
 		$('.fs-overlay').removeClass('active');
 	});
 
+	$('.fs-link-condition').click(function(){
+		$('.fs-overlay-condition').addClass('active');
+	})
+
+	$('.fs-close-overlay-condition').click(function(){
+		$('.fs-overlay-condition').removeClass('active');
+	})
+
 	inputHolder();
 
 }
