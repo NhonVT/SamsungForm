@@ -98,9 +98,10 @@ function fsEvent() {
 	// 	$('body').removeClass('fs-no-scroll');
 	// });
 
-	$('.fs-box-but .fs-button-send').click(function () {
-		$('.fs-overlay').addClass('active');
-	});
+	//	****** open popup after send
+	// $('.fs-box-but .fs-button-send').click(function () {
+	// 	$('.fs-overlay').addClass('active');
+	// });
 
 	$('.fs-box-but .fs-close-overlay').click(function () {
 		$('.fs-overlay').removeClass('active');
@@ -110,6 +111,9 @@ function fsEvent() {
 	getCity();
 	getReason();
 	selectItem();
+	setDayArr();
+	setMonthArr();
+	setYearArr();
 }
 
 
@@ -160,41 +164,180 @@ $(window).on('load', function () {
 	fsEvent();
 });
 
+var baseUrl = "http://localhost:53081/"
+
 var cities;
 
 var getCity = function () {
-	console.log('getCity');
 	$.ajax({
-		url: "http://localhost:53081/City/GetCityLookup",
+		url: baseUrl + "City/GetCityLookup",
 		type: "GET",
 		success: function (result) {
 			cities = result;
-			console.table(result);
 			cities.forEach(function(city){
-				$("#city").append('<li data-target="'+ city.KeyId +'">'+ city.DisplayName +'</li>');
+				$("#city").append('<li data-target="'+ city.KeyId +'" onclick="setDataTargetCity('+ city.KeyId +')" >'+ city.DisplayName +'</li>');
 			})
 		}
 	});
 }
 
+
+var setDataTargetCity = function(id) {
+	$('#city').attr("data-target", id);
+}
+
+var setDataTargetReason = function(id) {
+	$('#reason').attr("data-target", id);
+}
+
 var reason;
 var getReason = function () {
-	console.log('getReason');
 	$.ajax({
-		url: "http://localhost:53081/Register/ReasonTypeLookup",
+		url: baseUrl + "Register/ReasonTypeLookup",
 		type: "GET",
 		success: function (result) {
 			reason = result;
 			reason.forEach(function(item){
-				$("#reason").append('<li data-target="'+ item.KeyId +'">'+ item.DisplayName +'</li>');
+				$("#reason").append('<li data-target="'+ item.KeyId +'" onclick="setDataTargetReason('+ item.KeyId +')">'+ item.DisplayName +'</li>');
 			}) 
 		}
 	});
 }
 
+var showMessageError = function(id){
+	$('#' + id + '').addClass('fs-show-error');
+}
+
+var send = function () {
+	var fullName = $('#fs_txt_name').val();
+	var email = $('#fs_txt_mail').val();
+	var phone = $('#fs_txt_phone').val();
+	var day = $('#fs-day').find('h3').text();
+	var month = $('#fs-month').find('h3').text();
+	var year = $('#fs-year').find('h3').text();
+	var birthDate = month + '/' + day + '/' + year;
+	var reason = $('#fs_reason').find('h3').text();
+	var city = $('#fs_city').find('h3').text();
+	var address = $('#fs_txt_address').val();
+	var subscrbeEmail = $('#fs-send-email').prop('checked');
+	
+	var failed = false;
+
+
+	if (fullName == ''){
+		showMessageError('fs-error-fullName');
+		failed = true;
+	}
+	if (email == ''){
+		failed = true;
+		showMessageError('fs-error-email');
+	}
+	if (phone == ''){
+		failed = true;
+		showMessageError('fs-error-phone');
+	}
+	if ($('#reason').attr('data-target') == 0){
+		failed = true;
+		showMessageError('fs-error-reason');
+	}
+	if ($('#city').attr('data-target') == 0){
+		failed = true;
+		showMessageError('fs-error-city');
+	}
+	if (address == ''){
+		failed = true;
+		showMessageError('fs-error-address');
+	}
+	if (day == 'Ngày*' || month == 'Tháng*' || year == 'Năm Sinh*') {
+		failed = true;
+		showMessageError('fs-error-birthDate');
+	}
+
+	if (!$('#fs-condition').prop('checked')) {
+		failed = true;
+		showMessageError('fs-error-term-condition');
+	}
+	console.log(navigator.userAgent.search('FixFox'));
+	console.log(navigator.userAgent);
+	if (!failed) {
+		var registerInfo = { 
+			FullName: fullName,
+			Email: email,
+			Phone: phone,
+			BirthDate: birthDate,
+			Reason: reason,
+			city: city,
+			Address: address,
+			SubcribeEmail: subscrbeEmail,
+			Browser: navigator.userAgent
+		};
+		console.log(JSON.stringify(registerInfo));
+		$.ajax({
+			url: baseUrl + "Register/Create",
+			type: "POST",
+			// dataType: "json",
+			data: registerInfo,
+			success: function (result) {
+				if (result) {
+					showSuccessPopup();
+				} else {}
+			},
+			error: function(xhr, textStatus, errorThrown){
+			}
+			
+		});
+	}
+	
+}
+
+
+var showSuccessPopup = function(){ 
+	$('.fs-box-but .fs-button-send').click(function () {
+			$('.fs-overlay').addClass('active');
+		});
+}
+
+var setDayArr = function() {
+	for (i=1; i <=31; i++) {
+		if (i < 10) {
+			$("#day").append('<li data-target=0"'+ i +'" onclick="setDataTargetDay('+i+')">'+ "0" + i +'</li>');
+		} else {
+			$("#day").append('<li data-target="'+ i +'" onclick="setDataTargetDay('+i+')">'+ i +'</li>');
+		}
+	}
+}
+
+var setDataTargetDay = function(id) {
+	$('#day').attr("data-target", id);
+}
+
+
+var setMonthArr = function() {
+	for (i=1; i <=12; i++) {
+		if (i < 10) {
+			$("#month").append('<li data-target=0"'+ i +'" onclick="setDataTargetMonth('+i+')">'+ "0" + i +'</li>');
+		} else {
+			$("#month").append('<li data-target="'+ i +'" onclick="setDataTargetMonth('+i+')">'+ i +'</li>');
+		}
+	}
+}
+
+var setDataTargetMonth = function(id) {
+	$('#month').attr("data-target", id);
+}
+
+var setYearArr = function() {
+	for (i=2000; i >= 1970; i--) {
+			$("#year").append('<li data-target="'+ i +'" onclick="setDataTargetYear('+i+')">'+ i +'</li>');
+	}
+}
+
+var setDataTargetYear = function(id) {
+	$('#year').attr("data-target", id);
+}
+
 var selectItem = function () {
 		$('.fs-select-box li').click(function () {
-		console.log('aaa');
 		var that = $(this);
 		var box = $(this).parent().parent().parent();
 
@@ -209,8 +352,7 @@ var selectItem = function () {
 		}
 	});
 }
-var car = {type:"Fiat", model:"500", color:"white"};
-console.log(car);
+
 $(window).on("orientationchange", Rotate);
 
 (function () {
@@ -224,6 +366,4 @@ $(window).on("orientationchange", Rotate);
 
 })();
 
-$('#test').attr('data-target');
-$('#test').data('target');
 
