@@ -461,7 +461,6 @@
 	left:0;
 	display:block;
 	width:100%;
-	min-width:140px;
 	height:auto;
 	margin:2px 0 0 0;
 	visibility:hidden;
@@ -478,8 +477,8 @@
 	text-align:left;
 	-webkit-border-radius:5px;
 	border-radius:5px;
-	overflow-x:hidden;
-	scroll-behavior:smooth
+  overflow-x:hidden;
+	scroll-behavior:smooth;
 }
 
 .fs-select-box li {
@@ -1006,9 +1005,6 @@
   }
   .fs-error-txt p{
     font-size: 10px;
-  }
-  .fs-select-box{
-    min-width: 100px;
   }
   .fs-checkbox li{
     margin-bottom: 10px;
