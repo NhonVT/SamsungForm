@@ -496,12 +496,12 @@
 	transition:all 0.3s ease-in-out;
 }
 
-.fs-select-box li.selected, .fs-select-box li:not(.selected):hover {
-	background-color:#f2f2f2;
+.fs-select-box li.fs-selected, .fs-select-box li:not(.fs-selected):hover {
+	background-color:#ccc;
 }
 
 .fs-select-box ul {
-	background-color:#fff
+	background-color:#fff;
 }
 
 .open .fs-select-box{

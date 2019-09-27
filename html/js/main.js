@@ -57,9 +57,9 @@ function fsEvent() {
 		var that = $(this);
 		var box = $(this).parent().parent().parent();
 
-		if (!that.hasClass('fs-select')) {
-			box.find('li').removeClass('fs-select');
-			that.addClass('fs-select');
+		if (!that.hasClass('fs-selected')) {
+			box.find('li').removeClass('fs-selected');
+			that.addClass('fs-selected');
 			box.removeClass('open');
 
 			box.find('.fs-select-header h3').html(that.text());
