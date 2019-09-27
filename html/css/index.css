@@ -937,30 +937,6 @@
 
 }
 
-@media screen and (max-width:840px)  and (orientation :portrait){
-
-}
-
-@media screen and (max-width:560px)  and (orientation :portrait){
-
-}
-
-@media screen and (max-width:390px)  and (orientation :portrait){
-
-
-}
-
-@media screen and (max-width:370px)  and (orientation :portrait){
-  /*Supper*/
-
-
-}
-
-@media screen and (max-width:350px)  and (orientation :portrait){
-
-
-}
-
 @media screen and (max-width:700px) {
 
 }
@@ -987,7 +963,8 @@
   .fs-group{
     width: 90%;
   }
-  .fs-label, .fs-form-group input[type="text"], .fs-label .fs-link-condition, .fs-select-header h3, .fs-select-header p{
+  .fs-label, .fs-form-group input[type="text"], .fs-label .fs-link-condition, 
+  .fs-select-header h3, .fs-select-header p{
     font-size: 13px;
   }
   .fs-form-group input[type="text"]{
@@ -1081,7 +1058,6 @@
 }
 
 
-
 @media screen and (max-width:390px) {
 
 }
@@ -1094,6 +1070,7 @@
   }
 
 }
+
 @media screen and (max-width:350px){
   .fs-title h2{
     font-size: 20px;
