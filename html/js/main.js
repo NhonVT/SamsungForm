@@ -111,9 +111,6 @@ function fsEvent() {
 	getCity();
 	getReason();
 	selectItem();
-	setDayArr();
-	setMonthArr();
-	setYearArr();
 }
 
 
@@ -164,6 +161,8 @@ $(window).on('load', function () {
 	fsEvent();
 });
 
+/************ Start Dat code */
+
 var baseUrl = "http://localhost:53081/"
 
 var cities;
@@ -198,7 +197,7 @@ var getReason = function () {
 		success: function (result) {
 			reason = result;
 			reason.forEach(function(item){
-				$("#reason").append('<li data-target="'+ item.KeyId +'" onclick="setDataTargetReason('+ item.KeyId +')">'+ item.DisplayName +'</li>');
+				$("#reason").append('<li data-target="'+ item.KeyId +'">'+ item.DisplayName +'</li>');
 			}) 
 		}
 	});
@@ -211,44 +210,48 @@ var showMessageError = function(id){
 var send = function () {
 	var fullName = $('#fs_txt_name').val();
 	var email = $('#fs_txt_mail').val();
-	var phone = $('#fs_txt_phone').val();
-	var day = $('#fs-day').find('h3').text();
-	var month = $('#fs-month').find('h3').text();
-	var year = $('#fs-year').find('h3').text();
-	var birthDate = month + '/' + day + '/' + year;
-	var reason = $('#fs_reason').find('h3').text();
-	var city = $('#fs_city').find('h3').text();
 	var address = $('#fs_txt_address').val();
+	var phone = $('#fs_txt_phone').val();
+
+	var day = $('#fs-select-day li.fs-select').attr("data-target");
+	var month = $('#fs-select-month li.fs-select').attr("data-target");
+	var year = $('#fs-select-year li.fs-select').attr("data-target");
+	var birthDate = month + '/' + day + '/' + year;
+
+	var reasonId = $('#fs-select-reason li.fs-select').attr("data-target");;
+	var cityId = $('#fs-select-city li.fs-select').attr("data-target");;
 	var subscrbeEmail = $('#fs-send-email').prop('checked');
-	
+	console.log(birthDate)
 	var failed = false;
 
 
-	if (fullName == ''){
+	if (fullName == '' || fullName == null || fullName == undefined ){
 		showMessageError('fs-error-fullName');
 		failed = true;
 	}
-	if (email == ''){
+	if (email == '' || email == null || email == undefined){
 		failed = true;
 		showMessageError('fs-error-email');
 	}
-	if (phone == ''){
+	if (phone == '' || phone == null || phone == undefined){
 		failed = true;
 		showMessageError('fs-error-phone');
 	}
-	if ($('#reason').attr('data-target') == 0){
+	if (reasonId == '' || reasonId == null || reasonId == undefined){
 		failed = true;
 		showMessageError('fs-error-reason');
 	}
-	if ($('#city').attr('data-target') == 0){
+	if (cityId == '' || cityId == null || cityId == undefined){
 		failed = true;
 		showMessageError('fs-error-city');
 	}
-	if (address == ''){
+	if (address == ''|| address == null || address == undefined){
 		failed = true;
 		showMessageError('fs-error-address');
 	}
-	if (day == 'Ngày*' || month == 'Tháng*' || year == 'Năm Sinh*') {
+	if (day == ''|| day == null || day == undefined ||
+	month == ''|| month == null || month == undefined ||
+	year == ''|| year == null || year == undefined) {
 		failed = true;
 		showMessageError('fs-error-birthDate');
 	}
@@ -257,16 +260,15 @@ var send = function () {
 		failed = true;
 		showMessageError('fs-error-term-condition');
 	}
-	console.log(navigator.userAgent.search('FixFox'));
-	console.log(navigator.userAgent);
+
 	if (!failed) {
 		var registerInfo = { 
 			FullName: fullName,
 			Email: email,
 			Phone: phone,
 			BirthDate: birthDate,
-			Reason: reason,
-			city: city,
+			ReasonId: reasonId,
+			CityId: cityId,
 			Address: address,
 			SubcribeEmail: subscrbeEmail,
 			Browser: navigator.userAgent
@@ -279,6 +281,7 @@ var send = function () {
 			data: registerInfo,
 			success: function (result) {
 				if (result) {
+					console.log('aaaa');
 					showSuccessPopup();
 				} else {}
 			},
@@ -297,44 +300,6 @@ var showSuccessPopup = function(){
 		});
 }
 
-var setDayArr = function() {
-	for (i=1; i <=31; i++) {
-		if (i < 10) {
-			$("#day").append('<li data-target=0"'+ i +'" onclick="setDataTargetDay('+i+')">'+ "0" + i +'</li>');
-		} else {
-			$("#day").append('<li data-target="'+ i +'" onclick="setDataTargetDay('+i+')">'+ i +'</li>');
-		}
-	}
-}
-
-var setDataTargetDay = function(id) {
-	$('#day').attr("data-target", id);
-}
-
-
-var setMonthArr = function() {
-	for (i=1; i <=12; i++) {
-		if (i < 10) {
-			$("#month").append('<li data-target=0"'+ i +'" onclick="setDataTargetMonth('+i+')">'+ "0" + i +'</li>');
-		} else {
-			$("#month").append('<li data-target="'+ i +'" onclick="setDataTargetMonth('+i+')">'+ i +'</li>');
-		}
-	}
-}
-
-var setDataTargetMonth = function(id) {
-	$('#month').attr("data-target", id);
-}
-
-var setYearArr = function() {
-	for (i=2000; i >= 1970; i--) {
-			$("#year").append('<li data-target="'+ i +'" onclick="setDataTargetYear('+i+')">'+ i +'</li>');
-	}
-}
-
-var setDataTargetYear = function(id) {
-	$('#year').attr("data-target", id);
-}
 
 var selectItem = function () {
 		$('.fs-select-box li').click(function () {
@@ -353,12 +318,12 @@ var selectItem = function () {
 	});
 }
 
+/************ End Dat code */
+
 $(window).on("orientationchange", Rotate);
 
 (function () {
 	ImgLazyLoad();
-	// getCity();
-	// getReason();
 
 	//$('body').addClass('fs-no-scroll');
 	//$('.fs-overlay').addClass('active');
