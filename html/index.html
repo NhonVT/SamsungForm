@@ -290,8 +290,8 @@
                                 </div>
                             </div>
                             <div class="fs-box size-06">
-                                <div class="fs-recaptcha">
-                                    <div class="g-recaptcha" data-sitekey="your_site_key"></div>
+                                <div class="fs-recaptcha" id="grpCapcha">
+                                    <div class="g-recaptcha" id="capchaAreaId"></div>
                                 </div>
                             </div>
                         </div>
@@ -375,7 +375,7 @@
     <!--script-->
     <script src="js/jquery-min.js"></script>
     <script src="js/main.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
     <!--/script-->
 
 

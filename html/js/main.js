@@ -163,13 +163,29 @@ $(window).on('load', function () {
 
 /************ Start Dat code */
 
-var baseUrl = "http://localhost:53081/"
+var baseUrl = "https://localhost:44365/"
+
+var isCheckCall = false;
+var captchaKey = "";
+var verifyCallback = function (response) {
+    captchaKey = response;
+    $("#grpCapcha").removeClass("fs-show-error");
+    $("#spnErrorCapchaMess").html("");
+    isCheckCall = true;
+};
+var onloadCallback = function () {
+    grecaptcha.render('capchaAreaId', {
+        'sitekey': '6LeRp7oUAAAAAP2k8dEKqWdZcthPcbgm0GyPFpfb',
+        'callback': verifyCallback,
+    });
+};
+
 
 var cities;
 
 var getCity = function () {
 	$.ajax({
-		url: baseUrl + "City/GetCityLookup",
+		url: baseUrl + "Register/GetCities",
 		type: "GET",
 		success: function (result) {
 			cities = result;
